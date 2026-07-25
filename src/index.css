@@ -21,6 +21,21 @@
   color-scheme: light;
 }
 
+:root[data-theme='dark'] {
+  --ink: #E9E7DC;
+  --paper: #1A211C;
+  --surface: #212922;
+  --forest: #6FA687;
+  --forest-deep: #9CC7AC;
+  --gold: #D9AC4F;
+  --rule: #37402F;
+  --rule-strong: #4A5540;
+  --muted: #98A18F;
+  --error: #E08066;
+
+  color-scheme: dark;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -35,6 +50,7 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #root {

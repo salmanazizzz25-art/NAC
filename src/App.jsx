@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TickRule from './components/TickRule.jsx';
+import ThemeToggle from './components/ThemeToggle.jsx';
 import { calculators } from './calculators/registry.js';
 import './App.css';
 
+function getInitialTheme() {
+  const stored = localStorage.getItem('nac-theme');
+  if (stored === 'light' || stored === 'dark') return stored;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 export default function App() {
   const [selectedId, setSelectedId] = useState(null);
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('nac-theme', theme);
+  }, [theme]);
 
   const selected = calculators.find((c) => c.id === selectedId);
   const SelectedComponent = selected?.component;
@@ -12,6 +25,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="app-header">
+        <ThemeToggle theme={theme} onToggle={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))} />
         <div className="app-header-inner">
           <span className="brand-mark">NAC</span>
           <h1>Nutrition Assessment Calculator</h1>

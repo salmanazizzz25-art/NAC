@@ -1,4 +1,11 @@
 import MifflinStJeor from './MifflinStJeor.jsx';
+import HarrisBenedict from './HarrisBenedict.jsx';
+import BMI from './BMI.jsx';
+import IdealBodyWeight from './IdealBodyWeight.jsx';
+import WeightLossSeverity from './WeightLossSeverity.jsx';
+import ProteinRequirement from './ProteinRequirement.jsx';
+import FluidNeeds from './FluidNeeds.jsx';
+import MustScore from './MustScore.jsx';
 
 // Each entry: id, name, category, short description, component (null = not built yet)
 export const calculators = [
@@ -14,48 +21,48 @@ export const calculators = [
     name: 'Harris-Benedict',
     category: 'Energy',
     description: 'Classic BMR equation, widely taught and still referenced.',
-    component: null,
+    component: HarrisBenedict,
   },
   {
     id: 'bmi',
     name: 'BMI',
     category: 'Body Composition',
     description: 'Body mass index with WHO Asian cut-off option.',
-    component: null,
+    component: BMI,
   },
   {
     id: 'ideal-body-weight',
     name: 'Ideal Body Weight',
     category: 'Body Composition',
     description: 'Devine formula — used clinically for dosing and nutrition targets.',
-    component: null,
+    component: IdealBodyWeight,
   },
   {
     id: 'weight-loss-severity',
     name: '% Weight Loss / Severity',
     category: 'Screening',
     description: 'Unintentional weight loss over time, graded by severity.',
-    component: null,
+    component: WeightLossSeverity,
   },
   {
     id: 'protein-requirement',
     name: 'Protein Requirement',
     category: 'Macronutrients',
     description: 'Condition-based protein targets (renal, hepatic, critical care, wound healing).',
-    component: null,
+    component: ProteinRequirement,
   },
   {
     id: 'fluid-needs',
     name: 'Fluid Needs',
     category: 'Fluids',
     description: '30–35 mL/kg adult method and Holliday-Segar for pediatric.',
-    component: null,
+    component: FluidNeeds,
   },
   {
     id: 'must-score',
     name: 'MUST Score',
     category: 'Screening',
     description: 'Malnutrition Universal Screening Tool.',
-    component: null,
+    component: MustScore,
   },
 ];

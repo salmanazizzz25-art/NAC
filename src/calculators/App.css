@@ -9,28 +9,6 @@
   background: var(--forest-deep);
   color: var(--paper);
   padding: 48px 24px 0;
-  position: relative;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: var(--paper);
-  border-radius: 999px;
-  padding: 6px 12px 6px 10px;
-  font-size: 12.5px;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.16);
 }
 
 .app-header-inner {
