@@ -19,6 +19,28 @@ export default function App() {
     localStorage.setItem('nac-theme', theme);
   }, [theme]);
 
+  // Wire calculator navigation into browser/app history so the Android
+  // back button (and desktop back button) returns to the picker instead
+  // of closing the app.
+  useEffect(() => {
+    function handlePopState(event) {
+      setSelectedId(event.state?.calcId ?? null);
+    }
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  function openCalculator(id) {
+    window.history.pushState({ calcId: id }, '', `#${id}`);
+    setSelectedId(id);
+  }
+
+  function goBackToPicker() {
+    if (selectedId !== null) {
+      window.history.back();
+    }
+  }
+
   const selected = calculators.find((c) => c.id === selectedId);
   const SelectedComponent = selected?.component;
 
@@ -47,7 +69,7 @@ export default function App() {
                   type="button"
                   className={`calc-card${c.component ? '' : ' disabled'}`}
                   disabled={!c.component}
-                  onClick={() => c.component && setSelectedId(c.id)}
+                  onClick={() => c.component && openCalculator(c.id)}
                 >
                   <span className="calc-card-category tabular">{c.category}</span>
                   <span className="calc-card-name">{c.name}</span>
@@ -61,7 +83,7 @@ export default function App() {
 
         {selected && (
           <section className="active-calc-section">
-            <button type="button" className="back-link" onClick={() => setSelectedId(null)}>
+            <button type="button" className="back-link" onClick={goBackToPicker}>
               ← All calculators
             </button>
             <SelectedComponent />
