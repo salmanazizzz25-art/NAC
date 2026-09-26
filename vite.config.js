@@ -8,26 +8,31 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: false, // registered in src/main.jsx so updates reload the app
+      includeAssets: ['favicon-32.png', 'apple-touch-icon.png'],
       manifest: {
+        id: '/',
         name: 'NAC — Nutrition Assessment Calculator',
         short_name: 'NAC',
-        description: 'All-in-one nutrition assessment calculator for dietitians and students',
-        theme_color: '#000000',
-        background_color: '#ffffff',
-        display: 'standalone',
+        description:
+          'One place for the calculations dietitians and nutrition students use during assessment.',
         start_url: '/',
+        scope: '/',
+        display: 'standalone',
+        orientation: 'portrait',
+        background_color: '#F2F1E9',
+        theme_color: '#24402E',
         icons: [
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
+          { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: '/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
+      },
+      workbox: {
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
+        navigateFallback: '/index.html',
       },
     }),
   ],

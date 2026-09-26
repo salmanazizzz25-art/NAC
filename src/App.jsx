@@ -23,6 +23,17 @@ export default function App() {
   // back button (and desktop back button) returns to the picker instead
   // of closing the app.
   useEffect(() => {
+    // If the app opens directly on a calculator (e.g. #bmi after a restore),
+    // put the picker underneath it in history so Back lands on the picker.
+    const initialId = window.location.hash.slice(1);
+    if (initialId && calculators.some((c) => c.id === initialId && c.component)) {
+      window.history.replaceState(null, '', window.location.pathname);
+      window.history.pushState({ calcId: initialId }, '', `#${initialId}`);
+      setSelectedId(initialId);
+    } else if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+
     function handlePopState(event) {
       setSelectedId(event.state?.calcId ?? null);
     }
