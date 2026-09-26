@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#24402E" />
+    <meta name="description" content="About NAC, a free nutrition assessment calculator for dietitians and nutrition students: what it includes, how it is checked, and who made it." />
+    <title>About — NAC</title>
+    <script type="module" src="/src/pages/page.js"></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-header-inner">
+        <a class="page-brand" href="/">NAC</a>
+        <a href="/">← Back to calculators</a>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <h1>About NAC</h1>
+      <p class="updated">Nutrition Assessment Calculator</p>
+
+      <p>
+        Nutrition assessment involves a lot of repeated arithmetic: energy equations, body weight
+        references, protein and fluid targets, and screening scores. Doing these by hand is slow
+        and easy to get wrong. NAC puts the most commonly used calculations in one place, so you
+        choose a calculation, enter the values, and get the result along with the source it comes
+        from.
+      </p>
+
+      <h2>Who made it</h2>
+      <p>
+        NAC is made by %VITE_OWNER_NAME%, a Human Nutrition and Dietetics student in Pakistan, for
+        fellow students and practising dietitians and nutritionists. It is free to use.
+      </p>
+
+      <h2>What's included</h2>
+      <ul>
+        <li><strong>Energy:</strong> Mifflin-St Jeor and Harris-Benedict (1984 revision), with activity factors</li>
+        <li><strong>Body composition:</strong> BMI with WHO and Asia-Pacific cut-offs, and Ideal Body Weight (Devine)</li>
+        <li><strong>Screening:</strong> percentage weight loss with Blackburn severity grading, and the MUST score</li>
+        <li><strong>Macronutrients:</strong> protein requirements for clinical conditions and training goals</li>
+        <li><strong>Fluids:</strong> the adult 30–35 mL/kg estimate and the Holliday-Segar method for children</li>
+      </ul>
+
+      <h2>How results are checked</h2>
+      <p>
+        Each calculator lists the published papers or guidelines it is based on, directly
+        underneath it, and each protein preset names its guideline in the note beside it. Where a
+        value is a general clinical estimate rather than a published equation, the text says so.
+        The formulas have been checked by hand against worked examples.
+        NAC is a support tool: please read the <a href="/terms">health disclaimer</a>.
+      </p>
+
+      <h2>Privacy</h2>
+      <p>
+        Values you enter stay on your device and are never sent anywhere. There are no accounts and
+        no analytics. Details are in the <a href="/privacy">Privacy Policy</a>.
+      </p>
+
+      <h2>Accessibility</h2>
+      <p>
+        NAC aims to meet WCAG 2.1 level AA. It can be used fully with a keyboard, is built to
+        work with screen readers, supports
+        light and dark themes, and uses colour combinations checked for contrast in both. If
+        something is hard to use, please let me know.
+      </p>
+
+      <h2>Contact and feedback</h2>
+      <p>
+        Found an error, or want a calculation added? Email
+        <a href="mailto:%VITE_CONTACT_EMAIL%">%VITE_CONTACT_EMAIL%</a>.
+      </p>
+
+      <h2 id="credits">Credits and licences</h2>
+      <ul>
+        <li>Fonts: Fraunces, Inter and IBM Plex Mono, used under the SIL Open Font License 1.1 and served from NAC itself.</li>
+        <li>Software: React, Vite, Workbox and vite-plugin-pwa, used under the MIT License.</li>
+        <li>App icon: original design made for NAC, with lettering set in DejaVu Sans (DejaVu Fonts licence).</li>
+        <li>Formulas and guidelines: credited to their authors under each calculator.</li>
+      </ul>
+    </main>
+
+    <footer class="page-footer">
+      <nav aria-label="Site">
+        <a href="/">Calculators</a>
+        <a href="/about" aria-current="page">About</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </footer>
+  </body>
+</html>

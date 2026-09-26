@@ -40,7 +40,7 @@ export default function HarrisBenedict() {
     <div className="calc-panel">
       <div className="calc-panel-header">
         <span className="eyebrow">Energy · Adult</span>
-        <h2>Harris-Benedict Equation</h2>
+        <h2 tabIndex={-1}>Harris-Benedict Equation</h2>
         <p className="calc-formula tabular">
           {sex === 'male'
             ? 'BMR = 88.362 + 13.397W + 4.799H − 5.677A'
@@ -49,7 +49,7 @@ export default function HarrisBenedict() {
       </div>
 
       <div className="calc-form">
-        <div className="field-group" role="radiogroup" aria-label="Sex">
+        <div className="field-group" role="group" aria-label="Sex">
           <span className="field-label">Sex</span>
           <div className="segmented">
             <button

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import './fonts.css';
 
 :root {
   /* Color tokens */
@@ -10,8 +10,15 @@
   --gold: #B4862A;
   --rule: #D8D4C4;
   --rule-strong: #B9B49E;
-  --muted: #6B6F62;
+  --muted: #5F6356;
   --error: #A8412E;
+  --gold-text: #87621A;
+
+  /* Header stays dark in both themes */
+  --header-bg: #24402E;
+  --header-ink: #F2F1E9;
+  --header-muted: #D5DCD2;
+  --header-gold: #E3BD6A;
 
   /* Type */
   --font-display: 'Fraunces', serif;
@@ -32,6 +39,12 @@
   --rule-strong: #4A5540;
   --muted: #98A18F;
   --error: #E08066;
+  --gold-text: #D9AC4F;
+
+  --header-bg: #14261B;
+  --header-ink: #E9E7DC;
+  --header-muted: #C9D1C6;
+  --header-gold: #E3BD6A;
 
   color-scheme: dark;
 }
@@ -74,7 +87,14 @@ a {
 
 ::selection {
   background: var(--gold);
-  color: #fff;
+  color: #1F2A22;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 :focus-visible {

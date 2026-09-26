@@ -30,7 +30,7 @@ export default function IdealBodyWeight() {
     <div className="calc-panel">
       <div className="calc-panel-header">
         <span className="eyebrow">Body Composition</span>
-        <h2>Ideal Body Weight</h2>
+        <h2 tabIndex={-1}>Ideal Body Weight</h2>
         <p className="calc-formula tabular">
           {sex === 'male'
             ? 'IBW = 50 + 2.3 × (height in. − 60)'
@@ -39,7 +39,7 @@ export default function IdealBodyWeight() {
       </div>
 
       <div className="calc-form">
-        <div className="field-group" role="radiogroup" aria-label="Sex">
+        <div className="field-group" role="group" aria-label="Sex">
           <span className="field-label">Sex</span>
           <div className="segmented">
             <button
@@ -91,7 +91,7 @@ export default function IdealBodyWeight() {
               <span className="result-value tabular">{result.ibw.toFixed(1)} kg</span>
             </div>
             <div className="result-row">
-              <span className="result-label">Healthy range (±10%)</span>
+              <span className="result-label">Range (±10%)</span>
               <span className="result-value tabular">
                 {result.rangeLow.toFixed(1)}–{result.rangeHigh.toFixed(1)} kg
               </span>

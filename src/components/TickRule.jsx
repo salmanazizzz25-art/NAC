@@ -1,7 +1,7 @@
 export default function TickRule({ labelLeft, labelRight }) {
   const ticks = Array.from({ length: 61 });
   return (
-    <div className="tick-rule">
+    <div className="tick-rule" aria-hidden="true">
       {labelLeft && <span className="tick-rule-label left tabular">{labelLeft}</span>}
       <svg viewBox="0 0 610 16" preserveAspectRatio="none" className="tick-rule-svg">
         <line x1="0" y1="1" x2="610" y2="1" stroke="var(--rule-strong)" strokeWidth="1" />

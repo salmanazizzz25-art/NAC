@@ -43,7 +43,7 @@ export default function BMI() {
     <div className="calc-panel">
       <div className="calc-panel-header">
         <span className="eyebrow">Body Composition</span>
-        <h2>BMI</h2>
+        <h2 tabIndex={-1}>BMI</h2>
         <p className="calc-formula tabular">BMI = weight (kg) ÷ height (m)²</p>
       </div>
 
@@ -76,7 +76,7 @@ export default function BMI() {
           />
         </label>
 
-        <div className="field-group" role="radiogroup" aria-label="Cut-off standard">
+        <div className="field-group" role="group" aria-label="Cut-off standard">
           <span className="field-label">Cut-off standard</span>
           <div className="segmented">
             <button

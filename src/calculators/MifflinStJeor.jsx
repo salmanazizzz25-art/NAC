@@ -37,16 +37,16 @@ export default function MifflinStJeor() {
     <div className="calc-panel">
       <div className="calc-panel-header">
         <span className="eyebrow">Energy · Adult</span>
-        <h2>Mifflin-St Jeor Equation</h2>
+        <h2 tabIndex={-1}>Mifflin-St Jeor Equation</h2>
         <p className="calc-formula tabular">
           {sex === 'male'
-            ? 'BMR = 10W + 6.25H − 5A + 5'
-            : 'BMR = 10W + 6.25H − 5A − 161'}
+            ? 'REE = 10W + 6.25H − 5A + 5'
+            : 'REE = 10W + 6.25H − 5A − 161'}
         </p>
       </div>
 
       <div className="calc-form">
-        <div className="field-group" role="radiogroup" aria-label="Sex">
+        <div className="field-group" role="group" aria-label="Sex">
           <span className="field-label">Sex</span>
           <div className="segmented">
             <button
@@ -126,7 +126,7 @@ export default function MifflinStJeor() {
         {result ? (
           <>
             <div className="result-row">
-              <span className="result-label">BMR</span>
+              <span className="result-label">REE (resting energy)</span>
               <span className="result-value tabular">{result.bmr.toFixed(0)} kcal/day</span>
             </div>
             <div className="result-row primary">

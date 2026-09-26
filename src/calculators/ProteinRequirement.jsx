@@ -1,83 +1,98 @@
 import { useMemo, useState } from 'react';
 
-// g/kg ranges by condition, drawn from ASPEN/KDOQI-referenced clinical guidance
+// g/kg/day ranges by condition. Each note names the guideline it comes from;
+// full references are listed under the calculator.
 const CLINICAL_CONDITIONS = [
   {
     id: 'healthy',
     label: 'Healthy adult (RDA)',
     low: 0.8,
     high: 0.8,
-    note: 'Standard RDA for healthy adults.',
+    note: 'Recommended Dietary Allowance for healthy adults (Institute of Medicine, 2005).',
   },
   {
     id: 'ckd-nondialysis-nondm',
-    label: 'CKD stage 3–5, non-dialysis, no diabetes',
+    label: 'CKD stage 3–5, not on dialysis, no diabetes',
     low: 0.55,
     high: 0.6,
-    note: 'Low-protein diet approach.',
+    note: 'KDOQI 2020, for metabolically stable adults under close supervision.',
   },
   {
     id: 'ckd-nondialysis-dm',
-    label: 'CKD stage 3–5, non-dialysis, with diabetes',
+    label: 'CKD stage 3–5, not on dialysis, with diabetes',
     low: 0.6,
     high: 0.8,
-    note: '',
+    note: 'KDOQI 2020, for metabolically stable adults.',
   },
   {
     id: 'ckd-dialysis',
-    label: 'CKD stage 5D — hemodialysis or peritoneal dialysis',
+    label: 'CKD stage 5D, haemodialysis or peritoneal dialysis',
     low: 1.0,
     high: 1.2,
-    note: 'Adjust based on metabolic stability.',
+    note: 'KDOQI 2020, for metabolically stable adults.',
   },
   {
     id: 'aki-nondialysis',
     label: 'Acute kidney injury, not on dialysis',
     low: 0.8,
     high: 1.0,
-    note: 'Avoid protein restriction to prevent/delay dialysis.',
+    note: 'KDIGO 2012, for non-catabolic patients. Avoid restricting protein to delay dialysis.',
   },
   {
     id: 'aki-dialysis',
-    label: 'Acute kidney injury, on dialysis / CRRT',
+    label: 'Acute kidney injury, on dialysis or CRRT',
     low: 1.0,
     high: 1.5,
-    note: 'Up to 1.7 g/kg if on CRRT and/or hypermetabolic (max 2.5 g/kg).',
+    note: 'KDIGO 2012: 1.0–1.5 g/kg on dialysis, up to 1.7 g/kg on CRRT or if hypercatabolic. ASPEN/SCCM 2016 allows up to 2.5 g/kg on CRRT.',
   },
   {
     id: 'critical-illness',
-    label: 'Critically ill (BMI < 30)',
+    label: 'Critically ill (BMI under 30)',
     low: 1.2,
     high: 2.0,
-    note: 'For BMI 30–40, use 2 g/kg of ideal weight; BMI > 40, use 2.5 g/kg of ideal weight.',
+    note: 'ASPEN/SCCM 2016, using actual body weight. For BMI 30 and above, use the obesity presets below with ideal body weight.',
+  },
+  {
+    id: 'critical-illness-obese-30-40',
+    label: 'Critically ill, BMI 30–40 (enter ideal body weight)',
+    low: 2.0,
+    high: 2.0,
+    note: 'ASPEN/SCCM 2016: 2.0 g/kg of ideal body weight. Enter ideal body weight, not actual weight.',
+  },
+  {
+    id: 'critical-illness-obese-40',
+    label: 'Critically ill, BMI 40 and above (enter ideal body weight)',
+    low: 2.0,
+    high: 2.5,
+    note: 'ASPEN/SCCM 2016: up to 2.5 g/kg of ideal body weight. Enter ideal body weight, not actual weight.',
   },
   {
     id: 'liver-disease',
-    label: 'Liver disease (cirrhosis, hepatic encephalopathy)',
-    low: 1.0,
+    label: 'Liver cirrhosis',
+    low: 1.2,
     high: 1.5,
-    note: '',
+    note: 'ESPEN 2019: 1.2 g/kg if not malnourished, 1.5 g/kg if malnourished or sarcopenic. Use dry weight if there is ascites, and ideal body weight in obesity. Do not restrict protein in hepatic encephalopathy.',
   },
   {
     id: 'pressure-injury',
-    label: 'Pressure injury / wound healing',
+    label: 'Pressure injury (adults malnourished or at risk)',
     low: 1.25,
     high: 1.5,
-    note: '',
+    note: 'EPUAP/NPIAP/PPPIA 2019 pressure injury guideline.',
   },
   {
     id: 'major-surgery',
     label: 'Major surgery',
     low: 1.5,
-    high: 2.0,
-    note: '',
+    high: 1.5,
+    note: 'ESPEN 2017 surgery guideline: 1.5 g/kg of ideal body weight, so enter ideal body weight.',
   },
   {
     id: 'trauma',
-    label: 'Trauma',
+    label: 'Trauma (critically ill)',
     low: 1.2,
     high: 2.0,
-    note: 'Typically dosed at the upper end of this range.',
+    note: 'ASPEN/SCCM 2016: needs are likely at the upper end of this range.',
   },
 ];
 
@@ -87,14 +102,14 @@ const ATHLETIC_CONDITIONS = [
     label: 'Bulking / muscle gain',
     low: 1.6,
     high: 2.2,
-    note: 'Resistance-trained, calorie surplus. Intakes above ~2.0 g/kg show no added benefit for muscle growth.',
+    note: 'With resistance training. A meta-analysis (Morton 2018) found gains levelled off around 1.6 g/kg, with 2.2 g/kg covering most people. ISSN 2017 suggests 1.4–2.0 g/kg for most exercising people.',
   },
   {
     id: 'cutting',
-    label: 'Cutting / fat loss, muscle preservation',
+    label: 'Cutting / fat loss, keeping muscle',
     low: 1.6,
     high: 2.2,
-    note: 'Most people don\u2019t need more than this even in a deficit. Lean, experienced athletes in an aggressive cut sometimes go up to 2.4 g/kg.',
+    note: 'Uses the same 1.6–2.2 g/kg body weight range as bulking, based on Morton 2018. ISSN 2017 notes that lean, resistance-trained people in a calorie deficit may need more: 2.3–3.1 g per kg of fat-free mass (not body weight).',
   },
 ];
 
@@ -124,7 +139,7 @@ export default function ProteinRequirement() {
     <div className="calc-panel">
       <div className="calc-panel-header">
         <span className="eyebrow">Macronutrients</span>
-        <h2>Protein Requirement</h2>
+        <h2 tabIndex={-1}>Protein Requirement</h2>
         <p className="calc-formula tabular">
           Protein (g/day) = weight (kg) × g/kg range
         </p>

@@ -31,14 +31,14 @@ export default function FluidNeeds() {
     <div className="calc-panel">
       <div className="calc-panel-header">
         <span className="eyebrow">Fluids</span>
-        <h2>Fluid Needs</h2>
+        <h2 tabIndex={-1}>Fluid Needs</h2>
         <p className="calc-formula tabular">
           {mode === 'adult' ? '30–35 mL/kg/day' : '100 / 50 / 20 mL/kg (Holliday-Segar)'}
         </p>
       </div>
 
       <div className="calc-form">
-        <div className="field-group" role="radiogroup" aria-label="Population">
+        <div className="field-group" role="group" aria-label="Population">
           <span className="field-label">Population</span>
           <div className="segmented">
             <button

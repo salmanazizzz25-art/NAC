@@ -40,3 +40,16 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Site settings (.env)
+
+Owner name, contact email, site URL, the policy "last updated" date and the
+AdSense IDs all live in `.env`. The production build stops with an error if
+any required value is missing, so placeholder text can't go live.
+
+- `VITE_ADSENSE_CLIENT` (ca-pub-…): set when applying to AdSense. Adds Google's
+  script to the calculator page and generates `ads.txt`.
+- `VITE_ADSENSE_SLOT`: set after approval, once an ad unit exists. The labelled
+  ad box at the bottom only appears when both are set.
+
+Pages: `/about`, `/privacy`, `/terms` (static HTML, built alongside the app).

@@ -64,7 +64,7 @@ export default function MustScore() {
     <div className="calc-panel">
       <div className="calc-panel-header">
         <span className="eyebrow">Screening</span>
-        <h2>MUST Score</h2>
+        <h2 tabIndex={-1}>MUST Score</h2>
         <p className="calc-formula tabular">Score = BMI score + weight loss score + acute disease score</p>
       </div>
 
@@ -111,7 +111,7 @@ export default function MustScore() {
           />
         </label>
 
-        <div className="field-group" role="radiogroup" aria-label="Acute disease effect">
+        <div className="field-group" role="group" aria-label="Acute disease effect">
           <span className="field-label">
             Acutely ill AND no nutritional intake for &gt;5 days?
           </span>

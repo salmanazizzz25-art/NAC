@@ -44,7 +44,7 @@ export default function WeightLossSeverity() {
     <div className="calc-panel">
       <div className="calc-panel-header">
         <span className="eyebrow">Screening</span>
-        <h2>% Weight Loss / Severity</h2>
+        <h2 tabIndex={-1}>% Weight Loss / Severity</h2>
         <p className="calc-formula tabular">
           % change = [(usual − actual) ÷ usual] × 100
         </p>
@@ -117,7 +117,7 @@ export default function WeightLossSeverity() {
                     result.tier === 'severe'
                       ? 'var(--error)'
                       : result.tier === 'significant'
-                      ? 'var(--gold)'
+                      ? 'var(--gold-text)'
                       : 'var(--ink)',
                 }}
               >
